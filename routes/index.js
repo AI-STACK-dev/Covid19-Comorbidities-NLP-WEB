@@ -5,12 +5,13 @@ var template =require('../lib/template.js')
 router.get('/', (req, res) => {
     var title = "Welcome";
     var description = "Hello, Node.js";
-    var list = template.list(req.list);
-    var html = template.HTML(title, list,
+    // var list = template.list(req.list);
+    var html = template.HTML(title, 
+      // list,
       `<h2>${title}</h2>${description}
-      <img src="/images/hello.jpg" style="width:400px; display:block; margin-top:10px;">
+      <!--<img src="/images/hello.jpg" style="width:400px; display:block; margin-top:10px;"> -->
       `,
-      `<a href="/topic/create">create</a>`
+      `<!--<a href="/topic/create">create</a>-->`
     );
     res.send(html);
 })

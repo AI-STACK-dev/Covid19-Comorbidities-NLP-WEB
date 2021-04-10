@@ -52,8 +52,8 @@ router.get('/create',(req, res) => {
     PythonShell.run('test2.py', options, function (err, results) {
       if (err) throw err;
       console.log('results: %j', results);
-      fs.writeFile(`data/user`, results, "utf8", function (err) {
-        res.redirect(`/topic/user`);
+      fs.writeFile(`data/Results`, results, "utf8", function (err) {
+        res.redirect(`/topic/Results`);
       });
     });
   })
@@ -122,11 +122,14 @@ router.get('/create',(req, res) => {
               var sanitizedDescription = sanitizeHtml(description,{
                 allowedTags:['h1']
               });
-              var list = template.list(req.list);
-              var html = template.HTML(sanitizedTitle,list,
+              // <!-- -->
+              // var list = template.list(req.list);
+              var html = template.HTML(sanitizedTitle,
+                // list,
                 `<h2>${sanitizedTitle}</h2>${sanitizedDescription}`,
-                `<a href="/topic/create">create</a> 
-                 <a href="/topic/update/${sanitizedTitle}">update</a>
+                `
+                <!--<a href="/topic/create">create</a> 
+                 <a href="/topic/update/${sanitizedTitle}">update</a> -->
                  <form action="/topic/delete" method="post">
                  <input type="hidden" name="id" value="${sanitizedTitle}">
                  <input type="submit" value="delete">
