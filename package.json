@@ -11,6 +11,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
+    "python-shell": "^3.0.0",
     "request": "^2.88.2",
     "sanitize-html": "^2.3.3"
   },

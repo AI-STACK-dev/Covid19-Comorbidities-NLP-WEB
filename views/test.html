@@ -1,10 +1,4 @@
-
-//python import! 변수명은 as!
-
-module.exports={
-    HTML:function(title, list, body, control) {
-        return `
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko-KR">
   <head>
     <meta charset="UTF-8" />
@@ -50,7 +44,7 @@ module.exports={
             <div class="col">
               <h3>High Risk Factor</h3>
               <ul>
-                <form method="post" action="/topic/submit">
+                <form method="post" action="/submit">
                   <input type="checkbox" name="RiskFactor" value="Cancer" />
                   Cancer<br />
                   <input
@@ -130,7 +124,7 @@ module.exports={
             <div class="col">
               <h3>Low Risk Factor</h3>
               <ul>
-                <form method="post" action="/topic/submit">
+                <form method="post" action="submit">
                   <input
                     type="checkbox"
                     name="RiskFactor"
@@ -229,18 +223,4 @@ module.exports={
       <div id="footer">© 2021 capstone</div>
     </div>
   </body>
-</html>       
-        `;
-      },
-      list:function(filelist) {
-        var list = "<ul>";
-        var i = 0;
-        while (i < filelist.length) {
-          list = list + `<li><a href="/topic/${filelist[i]}">${filelist[i]}</a></li>`;
-          i = i + 1;
-        }
-        list = list + "</ul>";
-        return list;
-      }
-}
-
+</html>

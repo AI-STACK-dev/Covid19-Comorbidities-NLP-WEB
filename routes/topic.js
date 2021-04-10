@@ -1,9 +1,10 @@
 var express = require('express')
 var router = express.Router()
-var path = require('path');
-var fs = require("fs");
-var sanitizeHtml= require('sanitize-html');
-var template =require('../lib/template.js');
+var path = require('path')
+var fs = require("fs")
+var sanitizeHtml= require('sanitize-html')
+var template =require('../lib/template.js')
+let {PythonShell} = require('python-shell')
 // parse application/json
 // app.use(bodyParser.json())
 
@@ -34,6 +35,26 @@ router.get('/create',(req, res) => {
     var description = post.description;
     fs.writeFile(`data/${title}`, description, "utf8", function (err) {
       res.redirect(`/topic/${title}`);
+    });
+  })
+
+  router.post('/submit', (req, res) => {
+    var post = req.body;
+    console.log(post);
+    var RiskFactor2 = post.RiskFactor;
+    var options = {
+      mode: 'text',
+      pythonPath: '',
+      pythonOptions: ['-u'],
+      scriptPath: '',
+      args: post.RiskFactor
+    };
+    PythonShell.run('test2.py', options, function (err, results) {
+      if (err) throw err;
+      console.log('results: %j', results);
+      fs.writeFile(`data/user`, results, "utf8", function (err) {
+        res.redirect(`/topic/user`);
+      });
     });
   })
   
@@ -89,7 +110,7 @@ router.get('/create',(req, res) => {
   })
   
   router.get('/:pageId', (req, res, next) => {
-    console.log(req.list);
+    // console.log(req.list);
           var filteredId = path.parse(req.params.pageId).base;
           fs.readFile(`data/${filteredId}`,"utf8",
             function (err, description) {
