@@ -34,85 +34,36 @@
         <div class="row">
           <form method="post" action="/topic/submit">
             <div class="col">
-              <h3>High Risk Factor</h3>
+              <h3>Risk Factor</h3>
               <ul>
                 <input type="checkbox" name="RiskFactor" value="Cancer" />
                 Cancer<br />
-                <input type="checkbox" name="RiskFactor" value="Chronic kidney disease" />
-                Chronic kidney disease<br />
+                <input type="checkbox" name="RiskFactor" value="Cerebrovascular disease" />
+                Cerebrovascular disease<br />
                 <input type="checkbox" name="RiskFactor" value="COPD (chronic obstructive pulmonary disease)" />
                 COPD (chronic obstructive pulmonary disease)<br />
                 <input type="checkbox" name="RiskFactor" value="Chronic kidney disease" />
                 Chronic kidney disease<br />
-                <input type="checkbox" name="RiskFactor" value="Down Syndrome" />
-                Down Syndrome<br />
+                <input type="checkbox" name="RiskFactor" value="Diabetes mellitus, type 1 and type 2" />
+                Diabetes mellitus, type 1 and type 2<br />
                 <input type="checkbox" name="RiskFactor"
-                  value="Heart conditions, such as heart failure, coronary artery disease, or cardiomyopathies" />
-                Heart conditions, such as heart failure, coronary artery
-                disease, or cardiomyopathies<br />
+                  value="Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)" />
+                  Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)<br />
                 <input type="checkbox" name="RiskFactor"
-                  value="Immunocompromised state (weakened immune system) from solid organ transplant" />
-                Immunocompromised state (weakened immune system) from solid
-                organ transplant<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Obesity (body mass index [BMI] of 30 kg/m2 or higher but < 40 kg/m2)" />
-                Obesity (body mass index [BMI] of 30 kg/m2 or higher but
-                < 40 kg/m2)<br />
-                <input type="checkbox" name="RiskFactor" value="Severe Obesity (BMI ≥ 40 kg/m2)" />
-                Severe Obesity (BMI ≥ 40 kg/m2)<br />
+                  value="Obesity (BMI ≥30 kg/m2)" />
+                  Obesity (BMI ≥30 kg/m2)<br />
                 <input type="checkbox" name="RiskFactor" value="Pregnancy" />
                 Pregnancy<br />
-                <input type="checkbox" name="RiskFactor" value="Sickle cell disease" />
-                Sickle cell disease<br />
-                <input type="checkbox" name="RiskFactor" value="Smoking" />
-                Smoking<br />
-                <input type="checkbox" name="RiskFactor" value="Type 2 diabetes mellitus" />
-                Type 2 diabetes mellitus<br />
+                <input type="checkbox" name="RiskFactor" value="Smoking, current and former" />
+                Smoking, current and former<br />
               </ul>
             </div>
             <div class="col">
-              <h3>Low Risk Factor</h3>
-              <ul>
-                <input type="checkbox" name="RiskFactor" value="Asthma (moderate-to-severe)" />
-                Asthma (moderate-to-severe)<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Cerebrovascular disease (affects blood vessels and blood supply to the brain)" />
-                Cerebrovascular disease (affects blood vessels and blood
-                supply to the brain)<br />
-                <input type="checkbox" name="RiskFactor" value="Cystic fibrosis" />
-                Cystic fibrosis<br />
-                <input type="checkbox" name="RiskFactor" value="Hypertension or high blood pressure" />
-                Hypertension or high blood pressure<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Immunocompromised state (weakened immune system) from blood or bone marrow transplant, immune deficiencies, HIV, use of corticosteroids, or use of other immune weakening medicines" />
-                Immunocompromised state (weakened immune system) from blood or
-                bone marrow transplant, immune deficiencies, HIV, use of
-                corticosteroids, or use of other immune weakening medicines<br />
-                <input type="checkbox" name="RiskFactor" value="Neurologic conditions, such as dementia" />
-                Neurologic conditions, such as dementia<br />
-                <input type="checkbox" name="RiskFactor" value="Liver disease" />
-                Liver disease<br />
-                <input type="checkbox" name="RiskFactor" value="Overweight (BMI > 25 kg/m2, but < 30 kg/m2)" />
-                Overweight (BMI > 25 kg/m2, but
-                < 30 kg/m2)<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Pulmonary fibrosis (having damaged or scarred lung tissues)" />
-                Pulmonary fibrosis (having damaged or scarred lung tissues)<br />
-                <input type="checkbox" name="RiskFactor" value="Thalassemia (a type of blood disorder)" />
-                Thalassemia (a type of blood disorder)<br />
-                <input type="checkbox" name="RiskFactor" value="Type 1 diabetes mellitus" />
-                Type 1 diabetes mellitus<br />
-              </ul>
+            <h3>Your Own Risk Factor</h3>
+            <div class="topnav">
+              <input type="text" name="RiskFactor" placeholder="Search.." />
             </div>
-            <div class="col">
-              <h3>Your Own Risk Factor</h3>
-              <div class="topnav">
-                <input type="text" placeholder="Search.." />
-              </div>
-              <!-- <input type="button" value="Discover" />
-              <h3>Checked risk Factor</h3>
-              <button onclick="getCheckboxValue()">Submit</button> -->
-            </div>
+          </div>
             <p>
               <input type="submit" value="Discover" />
               <input type="reset" value="Reset" />
@@ -127,4 +78,4 @@
     <div id="footer">© 2021 capstone</div>
   </div>
 </body>
-</html>
+</html>    
