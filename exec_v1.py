@@ -1,4 +1,4 @@
-#!/home/jsu/Desktop/jsu/jang python
+#!/home/jsu/Desktop/jsu/jang/bin python
 import random
 import numpy as np 
 import pandas as pd
