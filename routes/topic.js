@@ -8,6 +8,13 @@ var template =require('../lib/template.js')
 import {PythonShell} from 'python-shell';
 // parse application/json
 // app.use(bodyParser.json())
+var options = {
+  mode: 'text',
+  pythonPath: '',
+  pythonOptions: ['-u'],
+  scriptPath: ''
+};
+
 
 router.get('/create',(req, res) => {
     var title = "WEB - create";
@@ -38,24 +45,32 @@ router.get('/create',(req, res) => {
       res.redirect(`/topic/${title}`);
     });
   })
-
   router.post('/submit', (req, res) => {
     var post = req.body;
     console.log(post);
-    var options = {
-      mode: 'text',
-      pythonPath: '',
-      pythonOptions: ['-u'],
-      scriptPath: '',
-      args: post.RiskFactor
-    };
-    PythonShell.run('exec_v1.py', options, function (err, results) {
-      if (err) throw err;
-      console.log('results: %j', results);
-      fs.writeFile(`data/Results`, results, "utf8", function (err) {
+    post.RiskFactor
+    let pyshell = new PythonShell('my_script.py');
+    pyshell.send(post.RiskFactor);
+    pyshell.on('message', function (message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log(message);
+      fs.writeFile(`data/Results`, message, "utf8", function (err) {
         res.redirect(`/topic/Results`);
       });
     });
+    pyshell.end(function (err,code,signal) {
+      if (err) throw err;
+      console.log('The exit code was: ' + code);
+      console.log('The exit signal was: ' + signal);
+      console.log('finished');
+    });
+    // PythonShell.run('exec_v1.py', options, function (err, results) {
+    //   if (err) throw err;
+    //   console.log('results: %j', results);
+    //   fs.writeFile(`data/Results`, results, "utf8", function (err) {
+    //     res.redirect(`/topic/Results`);
+    //   });
+    // });
   })
   
   router.get('/update/:pageId',(req, res, next) => {
