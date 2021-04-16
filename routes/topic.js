@@ -44,12 +44,12 @@ router.get('/create',(req, res) => {
     var RiskFactor2 = post.RiskFactor;
     var options = {
       mode: 'text',
-      pythonPath: '',
+      pythonPath: '/home/jsu/Desktop/jsu/jang/bin',
       pythonOptions: ['-u'],
       scriptPath: '',
       args: post.RiskFactor
     };
-    PythonShell.run('test2.py', options, function (err, results) {
+    PythonShell.run('exec_v1.py', options, function (err, results) {
       if (err) throw err;
       console.log('results: %j', results);
       fs.writeFile(`data/Results`, results, "utf8", function (err) {
