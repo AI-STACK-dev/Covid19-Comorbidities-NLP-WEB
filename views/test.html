@@ -30,52 +30,67 @@
     <!-- <div id="nav">nav</div>
 <div id="side">side</div> -->
     <div id="contents">
+      <form method="post" action="/topic/submit">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4">
+              <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                Risk Factor
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Cancer" />
+                  Cancer</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Cerebrovascular disease" />
+                    Cerebrovascular disease</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="COPD (chronic obstructive pulmonary disease)" />
+                    COPD (chronic obstructive pulmonary disease)</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Chronic kidney disease" />
+                    Chronic kidney disease</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Diabetes mellitus, type 1 and type 2" />
+                    Diabetes mellitus, type 1 and type 2</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor"
+                    value="Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)" />
+                    Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor"
+                    value="Obesity (BMI ≥30 kg/m2)" />
+                    Obesity (BMI ≥30 kg/m2)</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Pregnancy" />
+                    Pregnancy</li>
+                  <li class="list-group-item"><input type="checkbox" name="RiskFactor" value="Smoking, current and former" />
+                    Smoking, current and former</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4">
+              <h3>Your Own Risk Factor</h3>
+              <div class="topnav">
+                <input type="text" name="RiskFactor" placeholder="Search.." />
+              </div>
+              <p>
+                <input type="submit" value="Discover" />
+                <input type="reset" value="Reset" />
+              </p>
+            </div>
+        
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+        
+            <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+            <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+          </div>
+        </div>
+      </form>
+
       <div class="container">
         <div class="row">
-          <form method="post" action="/topic/submit">
-            <div class="col">
-              <h3>Risk Factor</h3>
-              <ul>
-                <input type="checkbox" name="RiskFactor" value="Cancer" />
-                Cancer<br />
-                <input type="checkbox" name="RiskFactor" value="Cerebrovascular disease" />
-                Cerebrovascular disease<br />
-                <input type="checkbox" name="RiskFactor" value="COPD (chronic obstructive pulmonary disease)" />
-                COPD (chronic obstructive pulmonary disease)<br />
-                <input type="checkbox" name="RiskFactor" value="Chronic kidney disease" />
-                Chronic kidney disease<br />
-                <input type="checkbox" name="RiskFactor" value="Diabetes mellitus, type 1 and type 2" />
-                Diabetes mellitus, type 1 and type 2<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)" />
-                  Heart conditions (such as heart failure, coronary artery disease, or cardiomyopathies)<br />
-                <input type="checkbox" name="RiskFactor"
-                  value="Obesity (BMI ≥30 kg/m2)" />
-                  Obesity (BMI ≥30 kg/m2)<br />
-                <input type="checkbox" name="RiskFactor" value="Pregnancy" />
-                Pregnancy<br />
-                <input type="checkbox" name="RiskFactor" value="Smoking, current and former" />
-                Smoking, current and former<br />
-              </ul>
-            </div>
-            <div class="col">
-            <h3>Your Own Risk Factor</h3>
-            <div class="topnav">
-              <input type="text" name="RiskFactor" placeholder="Search.." />
-            </div>
-          </div>
-            <p>
-              <input type="submit" value="Discover" />
-              <input type="reset" value="Reset" />
-            </p>
-          </form>
         </div>
         <div class="row">
           ${body} ${control}
         </div>
       </div>
-    </div>
+    </div> <!-- /contents -->
     <div id="footer">© 2021 capstone</div>
   </div>
 </body>
-</html>    
+</html>  
