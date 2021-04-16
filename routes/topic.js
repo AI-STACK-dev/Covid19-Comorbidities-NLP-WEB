@@ -4,7 +4,8 @@ var path = require('path')
 var fs = require("fs")
 var sanitizeHtml= require('sanitize-html')
 var template =require('../lib/template.js')
-let {PythonShell} = require('python-shell')
+// let {PythonShell} = require('python-shell')
+import {PythonShell} from 'python-shell';
 // parse application/json
 // app.use(bodyParser.json())
 
@@ -41,10 +42,9 @@ router.get('/create',(req, res) => {
   router.post('/submit', (req, res) => {
     var post = req.body;
     console.log(post);
-    var RiskFactor2 = post.RiskFactor;
     var options = {
       mode: 'text',
-      pythonPath: '/home/jsu/Desktop/jsu/jang/bin',
+      pythonPath: '',
       pythonOptions: ['-u'],
       scriptPath: '',
       args: post.RiskFactor
