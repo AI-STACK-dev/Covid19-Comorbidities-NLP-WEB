@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>COVID-19 Risk Factor - ${title}</title>
+  <link rel="stylesheet" href="/CSS/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet" />
@@ -12,7 +13,7 @@
 <body>
   <h3><a href="/">COVID-19 Risk Factor</a></h3>
   <div id="wrap">
-    <div id="header">
+    <div id="header" style="background-image: url('/images/covid3.jpg');">
       <div class="container">
         <div class="header">
           <div class="header-menu" style="text-align: right">
@@ -20,13 +21,11 @@
           </div>
           <!-- //헤더 메뉴 -->
           <div class="header-tit">
-            <h1>Covid Risk Factor Guide</h1>
-            <br /><br /><br /><br /><br />
+            <h2>Covid Risk Factor Guide</h2>
           </div>
-          <div class="header-icon"></div>
         </div>
       </div>
-    </div>
+    </div><!--header-->
     <!-- <div id="nav">nav</div>
 <div id="side">side</div> -->
     <div id="contents">
@@ -64,9 +63,7 @@
             </div>
             <div class="col-6 col-sm-4">
               <h3>Your Own Risk Factor</h3>
-              <div class="topnav">
                 <input type="text" name="RiskFactor" placeholder="Search.." />
-              </div>
               <p>
                 <input type="submit" value="Discover" />
                 <input type="reset" value="Reset" />
@@ -76,8 +73,8 @@
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
         
-            <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
-            <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+            <div class="col-6 col-sm-4"></div>
+            <div class="col-6 col-sm-4"></div>
           </div>
         </div>
       </form>
