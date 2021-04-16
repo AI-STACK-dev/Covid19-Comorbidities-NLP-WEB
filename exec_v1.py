@@ -153,7 +153,11 @@ def getanswers(question,tokenizer,model,df_,vectorizer):
 
 
 if __name__=='__main__':
+    print('Im started')
 
+    while(1):
+        for line in sys.stdin.readlines():
+            print(line)
     # ## load csv
     # csv_path = '/mnt/j/cst2021/cord19_final.csv'
     # df = pd.read_csv(csv_path)
