@@ -1,1 +1,16 @@
-Cancer Cerebrovascular disease
+async (code) => {
+      const options = {
+         mode: 'text',
+         pythonOptions: ['-u'],
+         args: post.RiskFactor,
+      };
+     // wrap it in a promise, and `await` the result
+     const result = await new Promise((resolve, reject) => {
+       PythonShell.run('exec_v1.py', options, (err, results) => {
+         if (err) return reject(err);
+         return resolve(results);
+       });
+     });
+     console.log(result.stdout);
+     return result;
+   }
