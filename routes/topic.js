@@ -7,16 +7,6 @@ var template =require('../lib/template.js')
 let {PythonShell} = require('python-shell')
 // let pyshell = new PythonShell('exec_v1.py');
 
-// import {PythonShell} from 'python-shell';
-
-// parse application/json
-// app.use(bodyParser.json())
-// var options = {
-//   mode: 'text',
-//   pythonPath: '',
-//   pythonOptions: ['-u'],
-//   scriptPath: ''
-// };
 
 router.post('/create', (req, res) => {
   var post = req.body;
@@ -27,62 +17,23 @@ router.post('/create', (req, res) => {
   });
 })
 
-
-  router.post('/prepare',(req, res) => {
-    pyshell.on('message', function (message) {
-      console.log(message);
-    });
-  })
-
-
-
-  router.post('/submit', (req, res) => {
+router.post('/submit', (req, res) => {
     var post = req.body;
     console.log(post);
-
-    // let pyshell = new PythonShell('exec_v1.py');
-    // pyshell.send(post.RiskFactor);//파이썬 std in에 입력
-    // pyshell.on('message', function (message) {
-    //   console.log(message);
-    //   fs.writeFile(`data/Results`, message, "utf8", function (err) {
-    //     res.redirect(`/topic/Results`);
-    //   });
-    // });
-    // pyshell.end(function (err,code,signal) {
-    //   if (err) throw err;
-    //   console.log('The exit code was: ' + code);
-    //   console.log('The exit signal was: ' + signal);
-    //   console.log('finished');
-    // });
-    const runPy = async (code) => {
-      const options = {
-         mode: 'text',
-         pythonOptions: ['-u'],
-         args: post.RiskFactor,
-      };
-     // wrap it in a promise, and `await` the result
-     const result = await new Promise((resolve, reject) => {
-       PythonShell.run('exec_v1.py', options, (err, results) => {
-         if (err) return reject(err);
-         return resolve(results);
-       });
-     });
-     console.log(result.stdout);
-     fs.writeFile(`data/Results`, result.stdout, "utf8", function (err) {
-      res.redirect(`/topic/Results`);
+    var options = {
+      mode: 'text',
+      pythonPath: '',
+      pythonOptions: ['-u'],
+      scriptPath: '',
+      args: post.RiskFactor
+    };
+    PythonShell.run('exec_v2.py', options, function (err, results) {
+      if (err) throw err;
+      console.log('results: %j', results);
+      fs.writeFile(`data/Results`, results, "utf8", function (err) {
+        res.redirect(`/topic/Results`);
+      });
     });
-     return result;
-   };
-
-
-    // PythonShell.run('exec_v1.py', options, function (err, results) {
-    //   if (err) throw err;
-    //   console.log('results: %j', results);
-    //   fs.writeFile(`data/Results`, results, "utf8", function (err) {
-    //     res.redirect(`/topic/Results`);
-    //   });
-    // });
-
   })
   
   router.post('/create', (req, res) => {
