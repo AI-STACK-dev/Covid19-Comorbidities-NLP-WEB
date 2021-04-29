@@ -15,6 +15,11 @@ app.use(helmet())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
+//
+app.set('views',__dirname + '/views');
+app.set('view engine','ejs');
+app.engine('html',require('ejs').renderFile);
+//
 app.get('*', function(req,res,next){
   fs.readdir("./data", function (error, filelist) {
     req.list=filelist;
