@@ -7,7 +7,6 @@ var sanitizeHtml= require('sanitize-html')
 let {PythonShell} = require('python-shell')
 // let pyshell = new PythonShell('exec_v1.py');
 
-
 // router.post('/create', (req, res) => {
 //   var post = req.body;
 //   var title = post.title;
