@@ -4,7 +4,9 @@ var path = require('path')
 var fs = require("fs")
 var sanitizeHtml= require('sanitize-html')
 // var template =require('../lib/template.js')
+
 let {PythonShell} = require('python-shell')
+
 // let pyshell = new PythonShell('exec_v1.py');
 
 // router.post('/create', (req, res) => {
@@ -17,8 +19,19 @@ let {PythonShell} = require('python-shell')
 // })
 
 router.post('/submit', (req, res) => {
+
     var post = req.body;
     console.log(post);
+  //   pyshell.send({ command: "do_stuff", args: post.RiskFactor });
+  // pyshell.on('message', function (message) {
+  //   console.log(message);
+  // });
+  // pyshell.end(function (err,code,signal) {
+  //   if (err) throw err;
+  //   console.log('The exit code was: ' + code);
+  //   console.log('The exit signal was: ' + signal);
+  //   console.log('finished');
+  // });
     var options = {
       mode: 'text',
       pythonPath: '',
@@ -26,13 +39,16 @@ router.post('/submit', (req, res) => {
       scriptPath: '',
       args: post.RiskFactor
     };
-    PythonShell.run('test2.py', options, function (err, results) {
+    
+    PythonShell.run('exec_v6(html).py', options, function (err, results) {
       if (err) throw err;
       console.log('results: %j', results);
       fs.writeFile(`data/Results`, results, "utf8", function (err) {
+        console.log("redirect");
         res.redirect(`/topic/Results`);
       });
     });
+
   })
   
   // router.post('/create', (req, res) => {
@@ -112,8 +128,8 @@ router.post('/submit', (req, res) => {
               // var list = template.list(req.list);
               // res.render('template.html');
                 res.render('template', {
-                    title: sanitizedTitle,
-                    body: sanitizedDescription
+                    title: title,
+                    body: description
                 })
 
               // var html = template.HTML(sanitizedTitle,

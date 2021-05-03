@@ -21,8 +21,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import torch
 from transformers import  AutoTokenizer,AutoModelForQuestionAnswering
 
-# args = sys.argv
-# args = [i for i in args[1:-1]]
+args = sys.argv
+args = [i for i in args[1:-1]]
 
 ## stopwords
 stops = stopwords.words("english")
@@ -30,7 +30,7 @@ snowstem = SnowballStemmer("english")
 portstem = PorterStemmer()
 
 ## number of documents
-N = 10
+N = 50
 
 ## number of prints
 n = 2
@@ -101,7 +101,7 @@ def getanswers(question,tokenizer,model,df_,vectorizer):
     contexts= []
     idxs = []
     for t in ques_top_n:
-        bd = df_.body_text[t]
+        bd = df_.abstract[t]
         para =[i for i in bd.split('\n')]
         for nump,p in enumerate(para):
             if len(p) < 30:
@@ -128,21 +128,49 @@ def getanswers(question,tokenizer,model,df_,vectorizer):
         if len(result[0]) < 7 or "[CLS]" in result[0] :
             continue
         answers.append(result)
-    answers = np.array(answers)
+    answers = np.array(answers,dtype=object)
 
     return answers
 
+def highlightTextInContext(ans):
+    answer = ans[0]
+    score = ans[1]
+    context = ans[2]
+    idx = ans[3]
+    
+    title = df.title[idx[0]]
+    date = df.publish_time[idx[0]]
+    
+    if "?"  in answer:
+        answer =" ".join(answer[answer.index("?")+1:].split(" "))
+    
+    antokens = word_tokenize(answer)
+    cotokens = word_tokenize(context)
+    startword= ""
+    startindex= ""
+    for i,w in enumerate(antokens):
+        for c in cotokens:
+            if c==w:
+                startword = c 
+                selectedText = context[context.index(w):context.index(antokens[-1])+len(antokens[-1])]
+                highlighted = f'<span style="color: green; font-weight: bold">{selectedText}</span>'
+                return f'<span style="color: black; font-weight: bold">Title: {title}<br>Score: {score}<br>Date: {date}<br></span>'+context.replace(selectedText,highlighted)
+
+def showTopAnswers(answers,q, lst):
+    lst.append(f'Question: <span style="color: red; font-weight: bold; font-size:22px">{q}</span>')
+    # print(f'Question: <span style="color: red; font-weight: bold; font-size:22px">{q}</span>')
+    for i in np.argsort(answers[:,1])[-n:][::-1]:
+        lst.append(f"<p>=================================================<br>"+highlightTextInContext(answers[i,:])+"</p>")
+    return lst
 
 if __name__=='__main__':
-    start = time.perf_counter()
-
     ## load csv
-    csv_path = '/mnt/j/cst2021/cord19_final.csv'
+    csv_path = '/mnt/j/cst2021/cord19_final_2.csv'
     df = pd.read_csv(csv_path)
 
     # ## TF-IDF fitting
     vectorizer = TfidfVectorizer()
-    encArticles = vectorizer.fit_transform(df.usetxt)
+    encArticles = vectorizer.fit_transform(df.useabs)
 
     # ## load tokenizer, models 
     tokenizer = AutoTokenizer.from_pretrained("/mnt/j/cst2021/model/")
@@ -150,26 +178,10 @@ if __name__=='__main__':
     model.to('cuda')
 
     start = time.perf_counter()
-    #추가
-    a = sys.stdin.readline()
-    for question in a.args:
-        question = f'is {question.lower()} at risk ?'
-        print("\n\n=================================================\n\n")
-        print("Query:",question)
-        print(f"\nTop {n} most similar sentences in corpus:")
+    lst = []
+    for question in args:
+        question = f"Are {question} at risk?"
         answers = getanswers(question,stops,snowstem,df,vectorizer)
-        for i in np.argsort(answers[:,1])[-n:][::-1]:
-            ans = answers[i,0]
-            score = answers[i,1]
-            idx = answers[i,3]
-
-            #using idx
-            title = df.title[idx[0]]
-            date = df.publish_time[idx[0]]
-
-            print(f"Score: {score:.4f}")
-            print(f"Title: {title}")
-            print(f"Date: {date}")
-            print(f"Text: {ans}\n")
-
-    print(f"time: {time.perf_counter()-start:.4f}s")
+        lst = showTopAnswers(answers,question,lst)
+    print(' '.join(lst))
+    # print(f"time: {time.perf_counter()-start:.4f}s")

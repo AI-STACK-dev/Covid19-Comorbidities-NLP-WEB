@@ -101,7 +101,7 @@ def getanswers(question,tokenizer,model,df_,vectorizer):
     contexts= []
     idxs = []
     for t in ques_top_n:
-        bd = df_.body_text[t]
+        bd = df_.abstract[t]
         para =[i for i in bd.split('\n')]
         for nump,p in enumerate(para):
             if len(p) < 30:
@@ -164,7 +164,7 @@ def showTopAnswers(answers,q):
 
 if __name__=='__main__':
     ## load csv
-    csv_path = '/mnt/j/cst2021/cord19_final.csv'
+    csv_path = '/mnt/j/cst2021/cord19_final_2.csv'
     df = pd.read_csv(csv_path)
 
     # ## TF-IDF fitting
