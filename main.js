@@ -17,8 +17,8 @@ const csp = require("helmet-csp");
 app.use(csp({
   directives: {
     defaultSrc: ["'self'","'unsafe-inline'",'https://cdn.jsdelivr.net','https://code.jquery.com'],
-    // styleSrc: ["'self'","'unsafe-inline'",'https://fonts.googleapis.com'],
-    fontSrc: ["'self'","'unsafe-inline'",'https://fonts.googleapis.com']
+    styleSrc: ["'self'","'unsafe-inline'",'https://fonts.googleapis.com','https://cdn.jsdelivr.net','https://code.jquery.com'],
+    fontSrc: ["'self'","'unsafe-inline'",'https://fonts.googleapis.com','https://fonts.gstatic.com']
   }
 }))
 

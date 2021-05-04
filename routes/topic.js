@@ -40,7 +40,7 @@ router.post('/submit', (req, res) => {
       args: post.RiskFactor
     };
     
-    PythonShell.run('exec_v6(html).py', options, function (err, results) {
+    PythonShell.run('exec_v7(html).py', options, function (err, results) {
       if (err) throw err;
       console.log('results: %j', results);
       fs.writeFile(`data/Results`, results, "utf8", function (err) {

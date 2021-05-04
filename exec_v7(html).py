@@ -30,10 +30,10 @@ snowstem = SnowballStemmer("english")
 portstem = PorterStemmer()
 
 ## number of documents
-N = 80
+N = 200
 
 ## number of prints
-n = 2
+n = 3
 
 # remove punc
 def removepunc(my_str):
@@ -139,6 +139,7 @@ def highlightTextInContext(ans):
     
     title = df.title[idx[0]]
     date = df.publish_time[idx[0]]
+    source = df.source[idx[0]]
     
     if "?"  in answer:
         answer =" ".join(answer[answer.index("?")+1:].split(" "))
@@ -153,23 +154,22 @@ def highlightTextInContext(ans):
                 startword = c 
                 selectedText = context[context.index(w):context.index(antokens[-1])+len(antokens[-1])]
                 highlighted = f'<span style="color: green; font-weight: bold">{selectedText}</span>'
-                return f'<span style="color: black; font-weight: bold">Title: {title}<br>Score: {score}<br>Date: {date}<br></span>'+context.replace(selectedText,highlighted)
-    return f'<span style="color: black; font-weight: bold">Title: {title}<br>Score: {score}<br>Date: {date}<br></span>'+context
+                return f'<span style="color: black; font-weight: bold">Title: {title}<br>Score: {score}<br>Date: {date}<br>Source: {source}<br></span>'+context.replace(selectedText,highlighted)
+    return f'<span style="color: black; font-weight: bold">Title: {title}<br>Score: {score}<br>Date: {date}<br>Source: {source}<br></span>'+context
 def showTopAnswers(answers,q, lst):
         lst.append(f'Question: <span style="color: red; font-weight: bold; font-size:22px">{q}</span>')
-        # print(f'Question: <span style="color: red; font-weight: bold; font-size:22px">{q}</span>')
         for i in np.argsort(answers[:,1])[-n:][::-1]:
             lst.append(f"<p>=================================================<br>"+highlightTextInContext(answers[i,:])+"</p>")
         return lst
 
 if __name__=='__main__':
     ## load csv
-    csv_path = '/mnt/j/cst2021/cord19_final_2.csv'
+    csv_path = '/mnt/j/cst2021_2/cord19_midtest.csv'
     df = pd.read_csv(csv_path)
 
     # ## TF-IDF fitting
     vectorizer = TfidfVectorizer()
-    encArticles = vectorizer.fit_transform(df.useabs)
+    encArticles = vectorizer.fit_transform(df.useabs.apply(lambda x: np.str_(x)))
 
     # ## load tokenizer, models 
     tokenizer = AutoTokenizer.from_pretrained("/mnt/j/cst2021/model/")
@@ -179,6 +179,7 @@ if __name__=='__main__':
     start = time.perf_counter()
     lst = []
     for question in args:
+        question = f"How does {question} affect disease?"
         answers = getanswers(question,stops,snowstem,df,vectorizer)
         lst = showTopAnswers(answers,question,lst)
     print(' '.join(lst))
