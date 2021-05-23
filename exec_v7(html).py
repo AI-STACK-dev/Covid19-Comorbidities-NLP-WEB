@@ -22,7 +22,9 @@ import torch
 from transformers import  AutoTokenizer,AutoModelForQuestionAnswering
 
 args = sys.argv
-args = [i for i in args[1:-1]]
+if args[-1]=='':
+    args = args[:-1]
+args = [i for i in args[1:]]
 
 ## stopwords
 stops = stopwords.words("english")
@@ -30,7 +32,7 @@ snowstem = SnowballStemmer("english")
 portstem = PorterStemmer()
 
 ## number of documents
-N = 200
+N = 10
 
 ## number of prints
 n = 3
@@ -65,8 +67,6 @@ def ask(question,context,idx):
         B = torch.tensor([segment_ids]).to('cuda')
         output = model(A, token_type_ids=B) # The segment IDs to differentiate question from answer_text
     
-
-    
     start_scores = output.start_logits
     end_scores = output.end_logits
     
@@ -83,7 +83,7 @@ def ask(question,context,idx):
     del A,B,output
     torch.cuda.empty_cache()
     pack = [answer,
-            (torch.max(start_scores)+end_scores[0][answer_end]),
+            float(torch.max(start_scores)+end_scores[0][answer_end]),
             context,
             idx]
     
@@ -127,7 +127,7 @@ def getanswers(question,tokenizer,model,df_,vectorizer):
         if len(result[0]) < 7 or "[CLS]" in result[0] :
             continue
         answers.append(result)
-    answers = np.array(answers)
+    answers = np.array(answers, dtype=object)
 
     return answers
 
@@ -178,6 +178,7 @@ if __name__=='__main__':
 
     start = time.perf_counter()
     lst = []
+
     for question in args:
         question = f"How does {question} affect disease?"
         answers = getanswers(question,stops,snowstem,df,vectorizer)

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>COVID-19 Co-morbidities Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/CSS/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
@@ -39,7 +40,7 @@
       <form method="post" action="/topic/submit">
         <div class="container">
           <div class="row">
-            <div class="col-6 col-sm-4">
+            <div class="col-md-6">
               <br/>
               <div class="card" style="width: 18rem;">
                 <div class="card-header">
@@ -69,7 +70,7 @@
                 </ul>
               </div>
             </div>
-            <div class="col-6 col-sm-4">
+            <div class="col-md-6">
               <br/>
               <h3>Your Own Co-morbidities</h3>
                 <!-- <input type="text" name="RiskFactor" placeholder="Search.." />
@@ -98,9 +99,9 @@
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
             <br/>
-            <div class="col-6 col-sm-4">
+            <div class="col-md-6">
             </div>
-            <div class="col-6 col-sm-4"></div>
+            <div class="col-md-6"></div>
           </div>
         </div>
       </form>
@@ -130,7 +131,7 @@
         var loadingImg ='';
           
         loadingImg +="<div id='loadingImg'>";
-        loadingImg +=" <img src='/images/Spinner.gif' style='position: absolute; display: block; margin: 0px auto; left:600px; top:400px;'/>";
+        loadingImg +=" <img src='/images/Spinner.gif' style='position: absolute; display: block; margin: 0px auto; left:45%; top:45%;'/>";
         loadingImg +="</div>"; 
 
         $('body')
