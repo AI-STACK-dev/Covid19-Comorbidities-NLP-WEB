@@ -12,14 +12,15 @@
 /* 헤더 */
 /* .header {} */
 .header .header-menu {text-align: right;}
-.header .header-menu a {color: rgb(26, 112, 241); padding: 10px 0px 10px 13px; display: inline-block;}
-.header .header-menu a:hover {color: #666;}
+.header .header-menu a {color: rgb(56, 4, 70); padding: 10px 0px 10px 13px; display: inline-block;text-decoration: none; font-size: 20px;}
+.header .header-menu a:hover {color: rgb(134, 12, 118); text-decoration: underline;}
 .header .header-tit {text-align: center;}
-.header .header-tit h2 {background-color: #3d2c2c; font-size: 28px; padding: 5px 20px 6px 20px; display: inline-block; color: rgb(238, 98, 215); margin-top: 40px; font-weight: normal; text-transform: uppercase;}
+.header .header-tit h2 {background-color: #3d2c2c; font-size: 35px; padding: 5px 20px 6px 20px; display: inline-block; color: rgb(238, 98, 215); margin-top: 40px; font-weight: normal;}
 .header .header-tit a {display: inline-block; background-color: #2698cb; font-size: 18px; color: #fff; padding: 5px 20px 6px 20px; margin-top: -5px;}
 
 /* .header .header-icon {} */
 h2, h3 {color:rgb(25, 77, 155); font-weight: bold;}
+h4, h5 {color:rgb(73, 15, 15); font-weight: bold;}
 
 
 
