@@ -27,8 +27,13 @@ from rank_bm25 import BM25Okapi
 args = sys.argv
 if args[-1]=='':
     args = args[:-1]
-num_prints = int(args[-1])
-args = [i for i in args[1:-1]]
+    num_prints = int(args[-1])
+    args = [i for i in args[1:-1]]
+else:
+    num_prints = int(args[-2])
+    del args[-2]
+    args = [i for i in args[1:]]
+
 
 ## stopwords
 stops = stopwords.words("english")
@@ -36,13 +41,13 @@ snowstem = SnowballStemmer("english")
 portstem = PorterStemmer()
 
 ## number of documents
-N = 50
+N = 100
 
 ## number of prints
 n = num_prints
 
 ## load csv
-csv_path = '/mnt/j/cst2021_2/cord19_midtest_v7.csv'
+csv_path = '/mnt/j/cst2021_3/cord19_final_v8.csv'
 df = pd.read_csv(csv_path)
 df = df.fillna('')
 
@@ -50,7 +55,7 @@ df = df.fillna('')
 with open('/mnt/j/cst2021_3/bm25.pickle', 'rb') as fr:
     bm25 = pickle.load(fr)
     
-# # ## load tokenizer, models 
+# load tokenizer, models 
 tokenizer = AutoTokenizer.from_pretrained("/mnt/j/cst2021/model/")
 model = AutoModelForQuestionAnswering.from_pretrained("/mnt/j/cst2021/model/")
 model.to('cuda')
@@ -147,18 +152,26 @@ def getanswers(question,tokenizer,model,df_):
                     if idx >= len(stcs):
                         break
                     buf = buf+" "+stcs[idx]
-            else:
-                old_buf = buf[:len(buf)//2]
-                buf = buf[len(buf)//2:]
-                contexts.append(buf)
-                questions.append(question)
+                contexts.append(old_buf)
+                questions.append(question) 
                 idxs.append([t])
+                if idx >= len(stcs):
+                    break
+            else:
+                alpha = len(buf)//500
+                delta = alpha +1
+                pp = len(buf)//delta
+                for d in range(delta):
+                    if d == delta-1:
+                        old_buf = buf[pp*d:]
+                    else:
+                        old_buf = buf[pp*d:pp*(d+1)]
+                    contexts.append(old_buf)
+                    questions.append(question) 
+                    idxs.append([t])
                 idx +=1
-            contexts.append(old_buf)
-            questions.append(question) 
-            idxs.append([t])
-            if idx >= len(stcs):
-                break
+                if idx >= len(stcs):
+                    break
 
     answers = []
     for  question, context, idx in zip(questions,contexts,idxs):
@@ -184,18 +197,18 @@ def highlightTextInContext(ans):
     idx = ans[3]
     
     title = df.title[idx[0]]
-    date = df.date[idx[0]]
+    date = df.publish_time[idx[0]]
     source = df.journal[idx[0]]
     design = mapping[df.design[idx[0]]]
     size = df['size'][idx[0]]
     sample = df['sample'][idx[0]]
     method = df.method[idx[0]]
+    ref = df.reference[idx[0]]
 
     if len(sample) > 250:
         sample = sample[:250]+ '...'
     if len(method) > 250:
-        method = method[:250]+ '...'
-    #     ref = df.reference[idx[0]]
+        method = method[:250]+ '...'  
     
     if "?"  in answer:
         answer =" ".join(answer[answer.index("?")+1:].split(" "))
@@ -221,10 +234,10 @@ def highlightTextInContext(ans):
                 <span style="color: black; font-weight: normal">{design}</span>\
                 <span style="color: black; font-weight: bold"><br>Size: </span>\
                 <span style="color: black; font-weight: normal">{size}</span>\
-                <span style="color: black; font-weight: bold"><br>Sample: </span>\
-                <span style="color: black; font-weight: normal">{sample}</span>\
                 <span style="color: black; font-weight: bold"><br>Method: </span>\
-                <span style="color: black; font-weight: normal">{method}<br></span>\
+                <span style="color: black; font-weight: normal">{method}</span>\
+                <span style="color: black; font-weight: bold"><br>Reference: </span>\
+                <span style="color: black; font-weight: normal">{ref}<br></span>\
                 <span style="color: black; font-weight: bold">Contents: </span>'+context.replace(selectedText,highlighted)
                 return fulltext
                 
@@ -240,9 +253,9 @@ def highlightTextInContext(ans):
                 <span style="color: black; font-weight: bold"><br>Size: </span>\
                 <span style="color: black; font-weight: normal">{size}</span>\
                 <span style="color: black; font-weight: bold"><br>Sample: </span>\
-                <span style="color: black; font-weight: normal">{sample}</span>\
-                <span style="color: black; font-weight: bold"><br>Method: </span>\
-                <span style="color: black; font-weight: normal">{method}<br></span>\
+                <span style="color: black; font-weight: normal">{method}</span>\
+                <span style="color: black; font-weight: bold"><br>Reference: </span>\
+                <span style="color: black; font-weight: normal">{ref}<br></span>\
                 <span style="color: black; font-weight: bold">Contents: </span>'+context
                 # return is an easy way to break two nested loops
        
@@ -255,15 +268,12 @@ def showTopAnswers(answers,q,lst):
         return lst
 
 
-# In[ ]:
-
-
 start = time.perf_counter()
 lst =[]
 for question in args:
     # display(HTML("<br>"))
-    question = f"Is {question} at risk in COVID-19?"
-    answers = getanswers(question,stops,snowstem,df)
+    q = f"Is {question} at risk in COVID-19?"
+    answers = getanswers(q,stops,snowstem,df)
     lst = showTopAnswers(answers,question,lst)
     # display(HTML("<br><br>"))
 print(' '.join(lst))
