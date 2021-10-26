@@ -257,13 +257,10 @@ def highlightTextInContext(ans):
                 <span style="color: black; font-weight: bold"><br>Reference: </span>\
                 <span style="color: black; font-weight: normal">{ref}<br></span>\
                 <span style="color: black; font-weight: bold">Contents: </span>'+context
-                # return is an easy way to break two nested loops
        
 def showTopAnswers(answers,q,lst):
         lst.append(f'<span style="color: black; font-weight: bold; font-size:20px"> Question: </span><span style="color: red; font-weight: bold; font-size:22px">{q}</span>')
-        # display(HTML(f'Question: <span style="color: red; font-weight: bold; font-size:22px">{q}</span>'))
         for i in np.argsort(answers[:,1])[-n:][::-1]:
-            # display(HTML(f"<p>=================================================<br>"+highlightTextInContext(answers[i,:])+"</p>"))
             lst.append(f"<p>=================================================<br>"+highlightTextInContext(answers[i,:])+"</p>")
         return lst
 
@@ -271,11 +268,8 @@ def showTopAnswers(answers,q,lst):
 start = time.perf_counter()
 lst =[]
 for question in args:
-    # display(HTML("<br>"))
     q = f"Is {question} at risk in COVID-19?"
     answers = getanswers(q,stops,snowstem,df)
     lst = showTopAnswers(answers,question,lst)
-    # display(HTML("<br><br>"))
 print(' '.join(lst))
-# print(f"time: {time.perf_counter()-start:.4f}s")
 
