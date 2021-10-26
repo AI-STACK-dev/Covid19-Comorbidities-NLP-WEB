@@ -47,17 +47,17 @@ N = 100
 n = num_prints
 
 ## load csv
-csv_path = '/mnt/j/cst2021_3/cord19_final_v8.csv'
+csv_path = './data/cord19_final_v8.csv'
 df = pd.read_csv(csv_path)
 df = df.fillna('')
 
 # BM-25 fitting
-with open('/mnt/j/cst2021_3/bm25.pickle', 'rb') as fr:
+with open('./data/bm25.pickle', 'rb') as fr:
     bm25 = pickle.load(fr)
     
 # load tokenizer, models 
-tokenizer = AutoTokenizer.from_pretrained("/mnt/j/cst2021/model/")
-model = AutoModelForQuestionAnswering.from_pretrained("/mnt/j/cst2021/model/")
+tokenizer = AutoTokenizer.from_pretrained("./model/")
+model = AutoModelForQuestionAnswering.from_pretrained("./model/")
 model.to('cuda')
 
 
