@@ -1,9 +1,8 @@
 <h1 align="center">
-    <p>COVID-19 comorbidities analysis platform based on NLP</p>
+    <p>COVID-19 comorbidities analysis platform</p>
 </h1>
----
 
-This platform is ...
+This platform is ...  
 This project is based on CORD-19 dataset.
 
 
