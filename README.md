@@ -1,4 +1,16 @@
-# Covid19-RiskFactor-NLP-WEB
+<h1 align="center">
+    <p>COVID-19 comorbidities analysis platform based on NLP</p>
+</h1>
+---
 
-### "자연어 처리 기반 코로나바이러스 감염증-19 동반 질환 분석 플랫폼 구축"  
-##### 20-2, 21-1 캡스톤 프로젝트
+This platform is ...
+This project is based on CORD-19 dataset.
+
+
+## Features
+
+## Installation
+
+## External code and References
+
+
