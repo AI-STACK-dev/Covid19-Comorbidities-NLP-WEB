@@ -1,7 +1,7 @@
 <h1 align="center">
     <p>COVID-19 comorbidities analysis web platform</p>
 </h1>
-<a href="https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing">
+<a align="center" href="https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
