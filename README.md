@@ -1,8 +1,9 @@
 <h1 align="center">
     <p>COVID-19 comorbidities analysis web platform</p>
 </h1>
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing)
-
+<a href="https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 ## What we built
 This platform analyzes the risk of covid-19 for the user's comorbidities based on natural language processing.
