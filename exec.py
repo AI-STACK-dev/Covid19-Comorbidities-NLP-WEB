@@ -10,6 +10,8 @@ import sys
 import pickle
 
 import nltk
+nltk.download('stopwords')
+nltk.download('punkt') 
 from nltk import word_tokenize,sent_tokenize
 from nltk.stem  import PorterStemmer
 from nltk.corpus import stopwords
@@ -70,7 +72,6 @@ def removepunc(my_str):
             no_punct = no_punct + char
     return no_punct
 
-# include number?
 def hasNumbers(inputString):
     return (bool(re.search(r'\d', inputString)))
 
@@ -89,7 +90,7 @@ def ask(question,context,idx):
     with torch.no_grad():
         A = torch.tensor([input_ids]).to('cuda')
         B = torch.tensor([segment_ids]).to('cuda')
-        output = model(A, token_type_ids=B) # The segment IDs to differentiate question from answer_text
+        output = model(A, token_type_ids=B)
     
     start_scores = output.start_logits.cpu().numpy()
     end_scores = output.end_logits.cpu().numpy()
@@ -102,7 +103,7 @@ def ask(question,context,idx):
         for end_index in end_indexes[0]:
             if end_index < start_index:
                 continue
-            if start_index <= end_index: # We need to refine that test to check the answer is inside the context
+            if start_index <= end_index:
                 valid_answers.append(
                     {
                         "score": start_scores[0][start_index] + end_scores[0][end_index],
@@ -135,7 +136,6 @@ def getanswers(question,tokenizer,model,df_):
     doc_scores = bm25.get_scores(tokenized_query)
     ques_top_n = np.argsort(doc_scores)[-N:][::-1]
     
-    #한 문단 최대 character 수: 
     questions= []
     contexts= []
     idxs = []
@@ -223,6 +223,7 @@ def highlightTextInContext(ans):
                 startword = c 
                 selectedText = context[context.index(w):context.index(antokens[-1])+len(antokens[-1])]
                 highlighted = f'<span style="color: green; font-weight: bold">{selectedText}</span>'
+
                 fulltext= f'<span style="color: black; font-weight: bold; font-size:18px">{title}<br/></span> \
                <span style="color: black; font-weight: bold"><br>Score: </span>\
                <span style="color: black; font-weight: normal">{score}</span>\
