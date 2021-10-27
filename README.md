@@ -2,7 +2,7 @@
     <p>COVID-19 comorbidities analysis web platform</p>
 </h1>
 <div align="center">
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing]
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1VT7gEQmhTYosZ98qfRYa5jCU97ymq0z-?usp=sharing)
 </div>
 
 ## What we built
