@@ -23,7 +23,7 @@ Data preprocessing, model architecture, etc. were referenced from other great Ka
 
 ## Features
 
-[<img src="./data/screenshot.png" width="400">](https://www.youtube.com/watch?v=ymSe6zo-rSo) 
+[<img src="./data/screenshot.png">](https://www.youtube.com/watch?v=ymSe6zo-rSo) 
 
 
 
