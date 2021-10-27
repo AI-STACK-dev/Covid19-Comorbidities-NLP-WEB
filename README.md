@@ -29,7 +29,8 @@ Data preprocessing, model architecture, etc. were referenced from other great Ka
 
 ## Getting started
 
-- We assume you have installed PyTorch, necessary CUDA packages and Node.js.
+- We assume you have installed PyTorch, necessary CUDA packages and Node.js.  
+
     ```
     # Setup virtual environment using conda
     conda create -n ccnw 
@@ -45,6 +46,7 @@ Data preprocessing, model architecture, etc. were referenced from other great Ka
     pip install -r requirements.txt
     ```
     If everything fine, run
+
     ```
     node main.js
     ```
