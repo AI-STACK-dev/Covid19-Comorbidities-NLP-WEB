@@ -19,13 +19,13 @@ The analysis was based on version 81 of the [CORD-19](https://pages.semanticscho
 
 Data preprocessing, model architecture, etc. were referenced from other great Kaggle notebooks. In particular, for additional metadata such as design methods and number of samples, we refer to [this Kaggle notebook](https://www.kaggle.com/davidmezzetti/cord19-study-design). The notebooks referenced are summarized below.
 
----
+
 
 ## Features
 
 [<img src="./data/screenshot.png" width="400">](https://www.youtube.com/watch?v=ymSe6zo-rSo) 
 
----
+
 
 ## Getting started
 
@@ -49,7 +49,7 @@ Data preprocessing, model architecture, etc. were referenced from other great Ka
     node main.js
     ```
 
----
+
 
 ## External code and References
 This project would not have been possible without following great resources.
