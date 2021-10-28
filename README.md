@@ -19,7 +19,8 @@ The analysis was based on version 81 of the [CORD-19](https://pages.semanticscho
 
 Data preprocessing, model architecture, etc. were referenced from other great Kaggle notebooks. In particular, for additional metadata such as design methods and number of samples, we refer to [this Kaggle notebook](https://www.kaggle.com/davidmezzetti/cord19-study-design). The notebooks referenced are summarized below.
 
-
+Team Members:  
+**Seokhan Noh, Seungun Jang**
 
 ## Features
 
