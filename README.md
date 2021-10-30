@@ -24,9 +24,9 @@ Team Members:
 
 ## Features
 
-[<img src="./data/screenshot.png">](https://www.youtube.com/watch?v=ymSe6zo-rSo) 
-
-
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=ymSe6zo-rSo"><img src="./data/img2.png" width=420 alt="IMAGE ALT TEXT"></a>
+</div>
 
 ## Getting started
 
