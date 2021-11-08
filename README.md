@@ -32,7 +32,7 @@ Team Members:
 
 - We assume you have installed PyTorch, necessary CUDA packages and Node.js.  
 
-    ```
+    ```bash
     # Setup virtual environment using conda
     conda create -n ccnw 
     conda activate ccnw
